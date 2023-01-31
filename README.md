@@ -4,10 +4,6 @@ A pseudo component based framework.
 
 ---
 
-This is an iteration of my early work HTML.JS used in **Frachasing System**. Inspecting the code you will see traces of where Anchor JS gets its main traits  
-
----
-
 ##How To Use
 
 You would first need to create an ```app.js``` file. Import ```anchor.js``` then create an HTML template using ```node()``` function
@@ -84,6 +80,10 @@ nodeIf(showPerson, [
 ```
 
 ---
+
+## Why AnchorJS was made
+
+It was made as a hobby and for fun
 
 ## Maintainers
 
