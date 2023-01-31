@@ -4,7 +4,7 @@ A pseudo component based framework.
 
 ---
 
-##How To Use
+## How To Use
 
 You would first need to create an ```app.js``` file. Import ```anchor.js``` then create an HTML template using ```node()``` function
 
