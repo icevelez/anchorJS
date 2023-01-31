@@ -1,8 +1,6 @@
 import { node } from "../services/anchor.js";
 import { tools } from "../services/util.js";
 
-import { auth } from "../services/store.js";
-
 export const signin = () => {
 
     const signin = (e) => {
