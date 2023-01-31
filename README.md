@@ -32,7 +32,7 @@ and you can do this repeatedly, create a new ```.js``` file use the syntax as sh
 
 ### AnchorJS Functions
 
-```signal()``` - is a function based on the observer pattern; pub-sub; behaviorSubject in RxJS; Writable stores in Svelte. Which accepts an initial value to be subscribe to and published. It is the core function that helps you in creating a reactive application.
+```signal()``` - is a function based on the observer pattern; pub-sub; behaviorSubject in RxJS; Writable stores in Svelte. Which accepts an initial value to be subscribe to and published. It is the core function that helps you create a reactive application without the need for a runtime like Zone.js or the virtualDOM.
 
 Example
 ```js
