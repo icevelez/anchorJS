@@ -82,8 +82,8 @@ export const node = (tag = "error", attribute = "", children = "", _callback = "
             case "onMount":
                 element._anchorData.onMount = attribute[key];
             break;
-            case "onRemoved":
-                element._anchorData.onRemoved = attribute[key];
+            case "onRemove":
+                element._anchorData.onRemove = attribute[key];
             break;
 
             case "use":
@@ -140,8 +140,8 @@ export const nodeBlock = (children, attribute = null) => {
     if (attribute && attribute.onMount && typeof attribute.onMount === 'function') 
         anchor._anchorData.onMount = attribute.onMount;
 
-    if (attribute && attribute.onRemoved && typeof attribute.onRemoved === 'function') 
-        anchor._anchorData.onRemoved = attribute.onRemoved;
+    if (attribute && attribute.onRemove && typeof attribute.onRemove === 'function') 
+        anchor._anchorData.onRemove = attribute.onRemove;
         
     anchor._anchorData.add = () => add(anchor, children);
     anchor._anchorData.remove = () => remove(children);
@@ -231,7 +231,7 @@ export const nodeFor = (state, callback) => {
     return anchor;
 }
 
-// run anchor observer for nodeIf, nodeFor, onMount, onRemoved event for isNode
+// run anchor observer for nodeIf, nodeFor, onMount, onRemove event for isNode
 const runObserver = () => {
     const observer = new MutationObserver((mutationList) => {
         for (const mutation of mutationList) {
@@ -254,7 +254,7 @@ const runObserver = () => {
                 if (!_anchorData) return;
                 if (_anchorData.isFor || _anchorData.isIf || _anchorData.isBlock) _anchorData.remove();
                 if (_anchorData.isNode || _anchorData.isBlock) {
-                    if (typeof _anchorData.onRemoved === 'function') _anchorData.onRemoved();
+                    if (typeof _anchorData.onRemove === 'function') _anchorData.onRemove();
                 }
             })
         }
