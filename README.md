@@ -2,8 +2,6 @@
 
 A pseudo component based framework.
 
----
-
 ## How To Use
 
 You would first need to create an ```app.js``` file. Import ```anchor.js``` then create an HTML template using ```node()``` function
@@ -30,7 +28,7 @@ render({
 
 and you can do this repeatedly, create a new ```.js``` file use the syntax as shown in ```app.js``` then export & import it where ever you like. There are no rules in how you use it
 
-### AnchorJS Functions
+### Core Functions
 
 ```signal()``` - is a function based on the observer pattern; pub-sub; behaviorSubject in RxJS; Writable stores in Svelte. Which accepts an initial value to be subscribe to and published. It is the core function that helps you create a reactive application without the need for a runtime like Zone.js or the virtualDOM.
 
@@ -48,8 +46,9 @@ node('div', [
 
 ```node()``` - is a function that generates HTML element. 
 *   The first parameter accepts a string which is its tagname; 
-*   ```optional``` The second parameter is either a string or an object, a string if you want a text inside, or an object that contain its attribute such as ```class``` ```onclick``` ```style``` ```dataset``` 
-*   ```optional``` The third parameter is either an object or an array. An object for its attribute or an Array for its children
+*   ```optional``` The second parameter is a string or an object. A string for an element text, or an object that contain its attribute such as ```class``` ```onclick``` ```style``` ```dataset``` 
+*   ```optional``` The third parameter is an array. An object for its attribute or an Array for its children
+* ```optional``` The fourth parameter is a callback to the element to customize its behavior; state; or what you see fit to do with the element 
 
 Example
 ```js 
@@ -79,11 +78,29 @@ nodeIf(showPerson, [
 ])
 ```
 
----
+```nodeBlock()``` - A function that returns multiple ```node()``` elements
 
-## Why AnchorJS was made
+Example
+```js
+nodeBlock([
+    node('h1', 'Hello World'),
+    node('p', 'I am a paragraph')
+])
+```
 
-It was made as a hobby and for fun
+## Limitation 
+
+Features lacking in AnchorJS
+
+*   Client Side Routing (History or Hash) 
+*   Scoped Styles
+*   Most features you would have in a modern frameworks 
+
+## What's the purpose of this project? Why was it made?
+
+This project was made as a proof-of-concept, a hobby, and for fun. 
+
+It's predecessor ```HTML.JS``` which was a personal library that was made to solve my particular problem of generating HTML helped me create templates with ease but had a difficult time doing life cycle hooks such as rerendering, removing elements from the DOM, and having a consistent method of coding. When I finally used a Framework like Svelte & Angular, I had a better idea in solving those previous issues. That's how AnchorJS came to be 
 
 ## Maintainers
 

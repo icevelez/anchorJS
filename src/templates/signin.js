@@ -1,5 +1,6 @@
 import { node } from "../services/anchor.js";
 import { tools } from "../services/util.js";
+import { auth } from "../services/store.js";
 
 export const signin = () => {
 
@@ -9,6 +10,8 @@ export const signin = () => {
         const form = e.target;
         const { username, password } = tools.serializeForm(form);
 
+        console.log({ username, password })
+        
         form.reset();
         
         auth.isAuthenticated.set(true);
