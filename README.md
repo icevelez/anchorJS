@@ -97,8 +97,11 @@ nodeBlock([
 
 It is a for-loop function to generate multiple ```node()``` elements based on a template
 
+* The first parameter accepts a ```signal()``` object containing the array  
+* The second parameter is a callback to what will be rendered
+
 ```js
-const arrayOfPeople = [
+const arrayOfPeople = signal([
     { name : 'Rich Harris' },
     { name : 'Evan Yue' },
     { name : 'Jared Sumner' },
@@ -106,7 +109,7 @@ const arrayOfPeople = [
     { name : 'Kyle from Web Dev Simplified' },
     { name : 'Theo.gg' },
     { name : 'Hussein Nasser' },
-]
+]);
 
 nodeFor(arrayOfPeople, (people, index) => {
     return node('h1', `${people.name}`)
