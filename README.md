@@ -30,7 +30,20 @@ and you can do this repeatedly, create a new ```.js``` file use the syntax as sh
 
 ### Core Functions
 
-```signal()``` - is a function based on the observer pattern; pub-sub; behaviorSubject in RxJS; Writable stores in Svelte. Which accepts an initial value to be subscribe to and published. It is the core function that helps you create a reactive application without the need for a runtime like Zone.js or the virtualDOM.
+```node()``` - A function that generates HTML element. 
+*   The first parameter accepts a string which is its tagname; 
+*   ```optional``` The second parameter is a string or an object. A string for an element text, or an object that contain its attribute such as ```class``` ```onclick``` ```style``` ```dataset``` 
+*   ```optional``` The third parameter is an array. An object for its attribute or an Array for its children
+* ```optional``` The fourth parameter is a callback to the element to customize its behavior; state; or what you see fit to do with the element 
+
+Example
+```js 
+node('div', { class : 'my-style'}, [
+    node('p', 'this is an example', { style : 'color: red;' })
+])
+```
+
+```signal()``` - A function based on the observer pattern, ```BehaviorSubject()``` in RxJS, or ```writable()``` stores in Svelte. Which accepts an initial value to be subscribe to and published. It is the core function that helps you create a reactive application without the need for a runtime like Zone.js or the virtualDOM.
 
 Example
 ```js
@@ -44,21 +57,8 @@ node('div', [
 ])
 ```
 
-```node()``` - is a function that generates HTML element. 
-*   The first parameter accepts a string which is its tagname; 
-*   ```optional``` The second parameter is a string or an object. A string for an element text, or an object that contain its attribute such as ```class``` ```onclick``` ```style``` ```dataset``` 
-*   ```optional``` The third parameter is an array. An object for its attribute or an Array for its children
-* ```optional``` The fourth parameter is a callback to the element to customize its behavior; state; or what you see fit to do with the element 
-
-Example
-```js 
-node('div', { class : 'my-style'}, [
-    node('p', 'this is an example', { style : 'color: red;' })
-])
-```
-
-```NodeIf()``` - is a function that hides or show your ```node()``` elements. 
-*   The first parameter accepts a ```signal()``` object that is the state of your if-statement; 
+```nodeIf()``` - A function that hides or show your ```node()``` elements. 
+*   The first parameter accepts a ```signal()``` object which is the state of your if-statement; 
 *   The second parameter accepts an Array of ```node()``` elements
 *   ```optional``` The third parameter is an *else-statement* that accepts an Array of ```node()``` elements that will be shown when your if-statement is false.
 
@@ -68,13 +68,18 @@ import { signal } from './src/services/achor.js';
 
 const showPerson = signal(true);
 
-nodeIf(showPerson, [
+nodeBlock([
     node('div', [
-        node('img', { src : './assets/images/user.jpg' }),
-        node('h2', 'Allan Poe')
-    ])
-], [
-    node('h1', 'No User')
+        node('button', 'Show/Hide', { onclick : () => showPerson.set(!showPerson.get()) })
+    ]),
+    nodeIf(showPerson, [
+        node('div', [
+            node('img', { src : './assets/images/user.jpg' }),
+            node('h2', 'Allan Poe')
+        ])
+    ], [
+        node('h1', 'No User')
+    ]),
 ])
 ```
 
@@ -88,19 +93,48 @@ nodeBlock([
 ])
 ```
 
+```nodeFor()``` - A function that is essentially a for-loop, you already know what a for-loop is, you wouldn't be able to understand this if you don't. 
+
+It is a for-loop function to generate multiple ```node()``` elements based on a template
+
+```js
+const arrayOfPeople = [
+    { name : 'Rich Harris' },
+    { name : 'Evan Yue' },
+    { name : 'Jared Sumner' },
+    { name : 'Jeff from Fireship.io' },
+    { name : 'Kyle from Web Dev Simplified' },
+    { name : 'Theo.gg' },
+    { name : 'Hussein Nasser' },
+]
+
+nodeFor(arrayOfPeople, (people, index) => {
+    return node('h1', `${people.name}`)
+})
+
+// deconstructed object 
+nodeFor(arrayOfPeople, ({ name }, index) => {
+    return node('h1', `${name}`)
+})
+```
+
 ## Limitation 
 
 Features lacking in AnchorJS
 
 *   Client Side Routing (History or Hash) 
 *   Scoped Styles
-*   Most features you would have in a modern frameworks 
+*   Most features you would have in a modern framework
 
 ## What's the purpose of this project? Why was it made?
 
 This project was made as a proof-of-concept, a hobby, and for fun. 
 
 It's predecessor ```HTML.JS``` which was a personal library that was made to solve my particular problem of generating HTML helped me create templates with ease but had a difficult time doing life cycle hooks such as rerendering, removing elements from the DOM, and having a consistent method of coding. When I finally used a Framework like Svelte & Angular, I had a better idea in solving those previous issues. That's how AnchorJS came to be 
+
+## Should I use this in my next project? 
+
+No, unless your project is just for fun, or if you're willing using this and its limitation.
 
 ## Maintainers
 

@@ -46,7 +46,13 @@ export const signal = (initialValue = undefined) => {
         set(value)
     }
 
-    return { subscribe, unsubscribe, update, set, assign, push, get, length, clear  };
+    const splice = (index) => {
+        if (!(typeof value === 'object' && Array.isArray(value))) return console.error("signal(): value is not an array.");
+        value.splice(index, 1);
+        set(value);
+    }
+
+    return { subscribe, unsubscribe, update, set, assign, push, splice, get, length, clear  };
 }
 
 export const node = (tag = "error", attribute = "", children = "", _callback = "") => {
