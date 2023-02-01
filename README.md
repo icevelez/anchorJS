@@ -1,6 +1,6 @@
-## Anchor JS
+## AnchorJS
 
-A pseudo component based framework.
+A pseudo component based framework that started as a personal JS library.
 
 ## How To Use
 
