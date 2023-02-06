@@ -133,11 +133,13 @@ Features lacking in AnchorJS
 
 This project was made as a proof-of-concept, a hobby, and for fun. 
 
-It's predecessor ```HTML.JS``` which was a personal library that was made to solve my particular problem of generating HTML helped me create templates with ease but had a difficult time doing life cycle hooks such as rerendering, removing elements from the DOM, and having a consistent method of coding. When I finally used a Framework like Svelte & Angular, I had a better idea in solving those previous issues. That's how AnchorJS came to be 
+It's predecessor ```HTML.JS``` was a personal JS library that was made to solve my particular problem of generating HTML alongside PHP and helped me create templates with ease but I had a difficult time doing life cycle hooks such as re-rendering, removing elements from the DOM, and having a consistent method of coding. 
+
+When I finally started to use a framework like Svelte & Angular, I had a better idea in solving those previous issues. That's how AnchorJS came to be
 
 ## Should I use this in my next project? 
 
-No, unless your project is just for fun, or if you're willing using this and its limitation.
+No, unless your project is either a test or for fun
 
 ## Maintainers
 

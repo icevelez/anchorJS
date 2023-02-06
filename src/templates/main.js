@@ -1,6 +1,6 @@
 import { node, nodeBlock, nodeFor, signal } from "../services/anchor.js";
 
-import { counter, auth } from "../services/store.js";
+import { counter, auth, userData } from "../services/store.js";
 
 import { button } from "./components/button.js";
 
@@ -25,9 +25,9 @@ export const main = () => {
     }
 
     return nodeBlock([
-        node('h1', 'Hello Main'),
+        node('h1', (e) => userData.subscribe(({ username }) => e.innerText = `Hello ${username}`)),
         node('div', [
-            node('h2', `${counter.get()}`, (e) => counter.subscribe((v) => e.innerText = `${counter.get()}`)),
+            node('h2', (e) => counter.subscribe((value) => e.innerText = `${value * 2}`)),
             button(),
         ]),
         nodeFor(arrayOfPeople, ({ name }, index) => {

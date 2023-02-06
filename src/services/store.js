@@ -7,4 +7,8 @@ export const auth = Object.freeze({
     isAuthenticated : signal(false),
 });
 
+export const userData = signal({
+    username : '',
+})
+
 export const counter = signal(0);
