@@ -10,7 +10,7 @@ export const signal = (initialValue = undefined) => {
     const get = () => value;
 
     const set = (setValue) => {
-        value = setValue || null;
+        value = setValue;
         subscribers.forEach((subscriber) => subscriber(value));
     }
     const update = (callback) => {
@@ -32,30 +32,10 @@ export const signal = (initialValue = undefined) => {
     const clear = () => subscribers.clear();
     const length = () => subscribers.size;
 
-    const assign = (newValue) => {
-        if (typeof value !== 'object' || Array.isArray(value)) 
-            return console.error("signal(): value is not an object.");
-        if (typeof newValue != 'object' || Array.isArray(newValue)) 
-            return console.error("signal(): new value is not an object.");
-        set(Object.assign(value, newValue))
-    }
-
-    const push = (newValue) => {
-        if (!(typeof value === 'object' && Array.isArray(value))) return console.error("signal(): value is not an array.");
-        value.push(newValue);
-        set(value)
-    }
-
-    const splice = (index) => {
-        if (!(typeof value === 'object' && Array.isArray(value))) return console.error("signal(): value is not an array.");
-        value.splice(index, 1);
-        set(value);
-    }
-
-    return { subscribe, unsubscribe, update, set, assign, push, splice, get, length, clear  };
+    return { subscribe, unsubscribe, update, set, get, length, clear  };
 }
 
-export const node = (tag = "error", attribute = "", children = "", _callback = "") => {
+export const node = (tag = "error", attribute = "", children = "", callback = "") => {
     
     if (typeof tag != "string" || tag == "") {
         const error = document.nodeent("error");
@@ -65,8 +45,8 @@ export const node = (tag = "error", attribute = "", children = "", _callback = "
 
     const element = document.createElement(tag);
 
-    if (typeof children == "function") [_callback, children] = [children, []];
-    if (typeof attribute == "function") [_callback, attribute] = [attribute, {}];            
+    if (typeof children == "function") [callback, children] = [children, []];
+    if (typeof attribute == "function") [callback, attribute] = [attribute, {}];            
     if (typeof attribute === "string" || typeof attribute === "number") {
         element.innerText = attribute;
         attribute = {};
@@ -97,14 +77,14 @@ export const node = (tag = "error", attribute = "", children = "", _callback = "
 
             default: 
                 if (key.substring(0,2) === 'on') return element[key] = (e) => attribute[key](e);
-                return element.setAttribute(key, attribute[key]); 
+                element.setAttribute(key, attribute[key]); 
             break;
         }   
     });
 
     if (Array.isArray(children) && children.length > 0) children.forEach((item, index) => element.append(item));
 
-    if (typeof _callback === "function") _callback(element);
+    if (typeof callback === "function") callback(element);
 
     return element;
 };
